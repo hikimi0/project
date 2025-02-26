@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Accessible Interactive Photo Gallery</title>
+  <!-- Link to your CSS file -->
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body onload="initGallery()">
+  <h1>Interactive Photo Gallery</h1>
+
+  <!-- Large image display -->
+  <div id="largeImage" aria-label="Large image display">
+    <span id="largeImageText">Original Image</span>
+  </div>
+  <!-- Gallery Thumbnails -->
+  <div id="gallery">
+    <!-- 1. Elden Ring Knight -->
+    <figure class="thumbnail">
+      <img 
+        src="images/Elden-Ring-Malenia.avif" 
+        alt="A golden knight from Elden Ring with a cloak and helmet"
+        onmouseover="handleMouseOver(this)" 
+        onmouseleave="handleMouseLeave()" 
+        onfocus="handleFocus(this)" 
+        onblur="handleBlur()" 
+      />
+    </figure>
+
+    <!-- 2. Fantasy Serpent -->
+    <figure class="thumbnail">
+      <img 
+        src="images/Jörmungandr.avif" 
+        alt="A large serpentine creature from a fantasy setting"
+        onmouseover="handleMouseOver(this)" 
+        onmouseleave="handleMouseLeave()" 
+        onfocus="handleFocus(this)" 
+        onblur="handleBlur()" 
+      />
+    </figure>
+
+    <!-- 3. Assassin's Creed Unity Cover -->
+    <figure class="thumbnail">
+      <img 
+        src="images/assassins-creed-unity-cover.webp" 
+        alt="Assassin's Creed Unity cover featuring a hooded assassin"
+        onmouseover="handleMouseOver(this)" 
+        onmouseleave="handleMouseLeave()" 
+        onfocus="handleFocus(this)" 
+        onblur="handleBlur()" 
+      />
+    </figure>
+
+    <!-- 4. Assassin's Creed Unity Scene -->
+    <figure class="thumbnail">
+      <img 
+        src="images/assassins-creed-unity-scene.webp" 
+        alt="A leaping assassin in a crowd near a guillotine from Assassin's Creed Unity"
+        onmouseover="handleMouseOver(this)" 
+        onmouseleave="handleMouseLeave()" 
+        onfocus="handleFocus(this)" 
+        onblur="handleBlur()" 
+      />
+    </figure>
+
+    <!-- 5. Ghost of Tsushima -->
+    <figure class="thumbnail">
+      <img 
+        src="images/ghost-of-tsushima.jpg" 
+        alt="A samurai in a field of white reeds from Ghost of Tsushima"
+        onmouseover="handleMouseOver(this)" 
+        onmouseleave="handleMouseLeave()" 
+        onfocus="handleFocus(this)" 
+        onblur="handleBlur()" 
+      />
+    </figure>
+
+    <!-- 6. Elden Ring Key Art -->
+    <figure class="thumbnail">
+      <img 
+        src="images/elden-ring_bandai-namco.jpg" 
+        alt="Elden Ring promotional key art featuring a glowing golden ring"
+        onmouseover="handleMouseOver(this)" 
+        onmouseleave="handleMouseLeave()" 
+        onfocus="handleFocus(this)" 
+        onblur="handleBlur()" 
+      />
+    </figure>
+
+    <!-- 7. Cyberpunk City Scene -->
+    <figure class="thumbnail">
+      <img 
+        src="images/cyberpunk-city.jpg" 
+        alt="A detailed cyberpunk city illustration with futuristic buildings and characters"
+        onmouseover="handleMouseOver(this)" 
+        onmouseleave="handleMouseLeave()" 
+        onfocus="handleFocus(this)" 
+        onblur="handleBlur()" 
+      />
+    </figure>
+
+    <!-- 8. Cyberpunk Poster -->
+    <figure class="thumbnail">
+      <img 
+        src="images/cyberpunk-poster.jpg" 
+        alt="A stylized poster of a futuristic character in a black jacket against a yellow background"
+        onmouseover="handleMouseOver(this)" 
+        onmouseleave="handleMouseLeave()" 
+        onfocus="handleFocus(this)" 
+        onblur="handleBlur()" 
+      />
+    </figure>
+  </div>
+
+  <!-- Link to your JavaScript file -->
+  <script src="js/script.js"></script>
+</body>
+</html>
