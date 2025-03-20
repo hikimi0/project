@@ -1,0 +1,124 @@
+/* Áp dụng box-sizing cho tất cả */
+*, *::before, *::after {
+    box-sizing: border-box;
+  }
+  
+  /* Cài đặt cuộn mượt mặc định */
+  html {
+      scroll-behavior: smooth;
+  }
+  
+  body {
+      background-color: #dedede;
+      padding: 5px;
+      margin: 15px;
+      font-size: 25px;
+      font-family: Arial, sans-serif;
+  }
+  
+  h1 {
+      text-align: center;
+      font-size: 1.95em;
+  }
+  
+  h2 {
+      text-align: center;
+  }
+  
+  li {
+      margin-top: 20px;
+  }
+  
+  /* Mobile-first: lưới 1 cột với gap 10px */
+  .grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 10px;
+  }
+  
+  /* Các figure: hiển thị border, background và xử lý tràn ảnh */
+  .grid figure {
+      position: relative;
+      border: 5px solid blue;
+      background-color: #fff;
+      overflow: hidden;
+      height: 500px; /* Bạn có thể điều chỉnh chiều cao tùy ý */
+  }
+  
+  /* Hình ảnh trong figure: tràn đầy khung nhưng không che border */
+  .grid figure img {
+      display: block;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+  }
+  
+  /* Caption: hiển thị ngay dưới phần ảnh, nằm trong cùng figure */
+  .grid figcaption {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      /* Sử dụng background bán trong suốt để hiển thị phần chữ trên nền ảnh */
+      background-color: rgba(0, 0, 0, 0.7);
+      color: #fff;
+      padding: 10px;
+      text-align: center;
+  }
+  
+  /* Tiêu đề và mô tả trong caption */
+  .grid figcaption h3 {
+      margin: 0;
+      font-size: 1.2em;
+  }
+  
+  .grid figcaption p {
+      margin: 5px 0 0;
+      font-size: 1em;
+  }
+  
+  /* Tablet view: kích thước tối thiểu 772px */
+  @media (min-width: 772px) {
+      .grid {
+          grid-template-columns: 1fr 1fr;
+      }
+      .grid figure {
+          border-radius: 50%; /* Tạo hình tròn */
+      }
+      /* Figure cuối cùng chiếm 2 cột */
+      .grid figure:last-of-type {
+          grid-column: span 2;
+      }
+  }
+  
+  /* Large screen view: kích thước tối thiểu 992px */
+  @media (min-width: 992px) {
+      .grid figure {
+          border-radius: 0; /* Loại bỏ border-radius */
+      }
+      /* Mỗi figure thứ 3 chiếm 2 cột */
+      .grid figure:nth-child(3n) {
+          grid-column: span 2;
+      }
+  }
+  
+  /* Giảm chuyển động nếu người dùng chọn prefers-reduced-motion */
+  @media (prefers-reduced-motion: reduce) {
+      html {
+          scroll-behavior: auto;
+      }
+  }
+  
+  /* Dark mode: thay đổi giao diện của các figure */
+  @media (prefers-color-scheme: dark) {
+      .grid figure {
+          background-color: #333;  /* Nền tối */
+          color: #ffdd57;          /* Màu chữ sáng (hướng vàng) */
+          border: 5px solid #000;  /* Viền màu đen */
+      }
+      .grid figcaption {
+          background-color: rgba(0, 0, 0, 0.7);
+          color: #ffdd57;
+      }
+  }
+  
