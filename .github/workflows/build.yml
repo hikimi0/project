@@ -5,36 +5,37 @@ on:
   pull_request:
     types: [opened, synchronize, reopened]
 jobs:
-  sonarcloud:
+  build:
     runs-on: ubuntu-latest
     defaults:
       run:
-        working-directory: swp391  # Chỉ định thư mục chứa pom.xml
+        working-directory: BE/swp391  # chạy Maven tại thư mục chứa pom.xml
     steps:
       - uses: actions/checkout@v4
         with:
-          fetch-depth: 0  # Lấy full history cho phân tích chính xác
-      - name: Setup Java
+          fetch-depth: 0
+      - name: Set up JDK
         uses: actions/setup-java@v4
         with:
-          java-version: '21'  # Phù hợp với java.version trong pom.xml
+          java-version: '21'
           distribution: 'temurin'
-      - name: Cache Maven Dependencies
+      - name: Cache Maven repo
         uses: actions/cache@v4
         with:
           path: ~/.m2/repository
-          key: ${{ runner.os }}-maven-${{ hashFiles('swp391/pom.xml') }}  # Cập nhật đường dẫn
+          key: ${{ runner.os }}-maven-${{ hashFiles('BE/swp391/pom.xml') }}
           restore-keys: ${{ runner.os }}-maven-
-      - name: Run Maven with Sonar
+      - name: Build and SonarCloud
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-        run: mvn -B verify sonar:sonar \
-          -Dsonar.projectKey=hikimi0_project \
-          -Dsonar.organization=hikimi0 \
-          -Dsonar.host.url=https://sonarcloud.io \
-          -Dsonar.login=${{ secrets.SONAR_TOKEN }} \
-          -Dsonar.sources=src/main/java \
-          -Dsonar.tests=src/test/java \
-          -Dsonar.exclusions=**/*Test.java,**/generated/** \
+        run: >
+          mvn -B clean verify sonar:sonar
+          -Dsonar.projectKey=hikimi0_project
+          -Dsonar.organization=hikimi0
+          -Dsonar.host.url=https://sonarcloud.io
+          -Dsonar.token=${{ secrets.SONAR_TOKEN }}
+          -Dsonar.sources=src/main/java
+          -Dsonar.tests=src/test/java
+          -Dsonar.exclusions=**/*Test.java,**/generated/**
           -Dsonar.java.binaries=target/classes
