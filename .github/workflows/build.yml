@@ -1,0 +1,37 @@
+name: SonarCloud Analysis
+on:
+  push:
+    branches: [main]
+  pull_request:
+    types: [opened, synchronize, reopened]
+jobs:
+  sonarcloud:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0  # Lấy full history cho phân tích chính xác
+      - name: Setup Java
+        uses: actions/setup-java@v4
+        with:
+          java-version: '21'  # Phù hợp với java.version trong pom.xml
+          distribution: 'temurin'
+      - name: Cache Maven Dependencies
+        uses: actions/cache@v4
+        with:
+          path: ~/.m2/repository
+          key: ${{ runner.os }}-maven-${{ hashFiles('**/pom.xml') }}
+          restore-keys: ${{ runner.os }}-maven-
+      - name: Run Maven with Sonar
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+        run: mvn -B verify sonar:sonar \
+          -Dsonar.projectKey=hikimi0_project \
+          -Dsonar.organization=hikimi0 \
+          -Dsonar.host.url=https://sonarcloud.io \
+          -Dsonar.login=${{ secrets.SONAR_TOKEN }} \
+          -Dsonar.sources=src/main/java \
+          -Dsonar.tests=src/test/java \
+          -Dsonar.exclusions=**/*Test.java,**/generated/** \
+          -Dsonar.java.binaries=target/classes
