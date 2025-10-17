@@ -7,6 +7,9 @@ on:
 jobs:
   sonarcloud:
     runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: swp391  # Chỉ định thư mục chứa pom.xml
     steps:
       - uses: actions/checkout@v4
         with:
@@ -20,7 +23,7 @@ jobs:
         uses: actions/cache@v4
         with:
           path: ~/.m2/repository
-          key: ${{ runner.os }}-maven-${{ hashFiles('**/pom.xml') }}
+          key: ${{ runner.os }}-maven-${{ hashFiles('swp391/pom.xml') }}  # Cập nhật đường dẫn
           restore-keys: ${{ runner.os }}-maven-
       - name: Run Maven with Sonar
         env:
